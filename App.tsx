@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  View,
-  useColorScheme,
-} from 'react-native';
+import {SafeAreaView, useColorScheme} from 'react-native';
 
 import Signup from './components/Signup';
 
@@ -15,7 +9,6 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView>
-      <StatusBar />
       <Signup />
     </SafeAreaView>
   );
