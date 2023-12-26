@@ -10,6 +10,8 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
+import Signup from './components/Signup';
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -23,9 +25,7 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <View>
-        <Text>ds</Text>
-      </View>
+      <Signup />
     </SafeAreaView>
   );
 }
