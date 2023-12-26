@@ -24,7 +24,7 @@ function App(): React.JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <View>
-        <Text>ds asd</Text>
+        <Text>ds</Text>
       </View>
     </SafeAreaView>
   );
