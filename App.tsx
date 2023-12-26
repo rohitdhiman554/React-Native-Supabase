@@ -1,16 +1,18 @@
 import React from 'react';
-
-import {SafeAreaView, useColorScheme} from 'react-native';
-
-import Signup from './components/Signup';
+import {SafeAreaView} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Signup from './screens/Signup';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
+  const Stack = createNativeStackNavigator();
   return (
-    <SafeAreaView>
-      <Signup />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Sign up">
+        <Stack.Screen name="Sign up" component={Signup} />
+        {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

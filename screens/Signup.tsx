@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {supabase} from '../lib/supabase';
 import {TextInput, Button} from 'react-native-paper';
 
@@ -39,28 +39,33 @@ export default function Signup() {
   return (
     <View style={styles.container}>
       <TextInput
+        mode="outlined"
         style={styles.input}
         activeUnderlineColor="black"
         label="Name"
+        activeOutlineColor="black"
         value={name}
         onChangeText={text => setName(text)}
       />
       <TextInput
+        mode="outlined"
         style={styles.input}
         activeUnderlineColor="black"
         label="Email"
+        activeOutlineColor="black"
         value={email}
         onChangeText={text => setEmail(text)}
       />
       <TextInput
+        mode="outlined"
         style={styles.input}
         activeUnderlineColor="black"
         label="Password"
+        activeOutlineColor="black"
         value={password}
         onChangeText={text => setPassword(text)}
       />
       <Button
-        style={{marginTop: 20}}
         buttonColor="white"
         textColor="black"
         mode="outlined"
@@ -68,26 +73,22 @@ export default function Signup() {
         onPress={() => console.log('Pressed')}>
         Press me
       </Button>
+      <View>
+        <Text style={{textAlign: 'center'}}>Already have an account</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 200,
+    marginTop: 150,
     padding: 12,
     gap: 20,
     justifyContent: 'center',
     paddingVertical: 20,
   },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
+
   input: {
     backgroundColor: 'transparent',
   },
