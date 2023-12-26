@@ -1,8 +1,9 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import Signup from './screens/Signup';
+import Login from './screens/Login';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -10,7 +11,7 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Sign up">
         <Stack.Screen name="Sign up" component={Signup} />
-        {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );

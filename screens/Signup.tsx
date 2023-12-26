@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {supabase} from '../lib/supabase';
 import {TextInput, Button} from 'react-native-paper';
+import {Link} from '@react-navigation/native';
 
-export default function Signup() {
+export default function Signup({navigation}: any) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -63,6 +64,7 @@ export default function Signup() {
         label="Password"
         activeOutlineColor="black"
         value={password}
+        secureTextEntry={true}
         onChangeText={text => setPassword(text)}
       />
       <Button
@@ -71,10 +73,19 @@ export default function Signup() {
         mode="outlined"
         loading={loading}
         onPress={() => console.log('Pressed')}>
-        Press me
+        Register
       </Button>
-      <View>
-        <Text style={{textAlign: 'center'}}>Already have an account</Text>
+      <View style={{alignItems: 'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
+          <Text> Already have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={{color: 'blue'}}> Login</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
