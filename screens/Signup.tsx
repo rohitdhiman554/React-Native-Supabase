@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
+import bcrypt from 'react-native-bcrypt';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {supabase} from '../lib/supabase';
 import {TextInput, Button} from 'react-native-paper';
-import {Link} from '@react-navigation/native';
 
 export default function Signup({navigation}: any) {
   const [email, setEmail] = useState('');
@@ -10,30 +10,53 @@ export default function Signup({navigation}: any) {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function signInWithEmail() {
-    setLoading(true);
-    const {error} = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+  function hashPassword(password: string) {
+    return new Promise((resolve, reject) => {
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+          reject(err);
+        }
+        bcrypt.hash(password, salt as string, (err, hash) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(hash);
+        });
+      });
     });
-
-    if (error) Alert.alert(error.message);
-    setLoading(false);
   }
 
   async function signUpWithEmail() {
     setLoading(true);
-    const {
-      data: {session},
-      error,
-    } = await supabase.auth.signUp({
+
+    // Sign up with Supabase Auth
+    const {error} = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
-    if (error) Alert.alert(error.message);
-    if (!session)
-      Alert.alert('Please check your inbox for email verification!');
+    if (error) {
+      Alert.alert(error.message);
+      setLoading(false);
+      return;
+    }
+
+    const hashedPassword = await hashPassword(password);
+
+    console.log('Hash', hashPassword);
+    const {data, error: dbError} = await supabase.from('auth').insert({
+      fullName: name,
+      email: email,
+      password: hashedPassword,
+    });
+
+    if (dbError) {
+      console.error('Error inserting user details:', dbError.message);
+      Alert.alert('Error', dbError.message);
+    } else {
+      console.log('User details inserted successfully');
+    }
+
     setLoading(false);
   }
 
@@ -72,7 +95,7 @@ export default function Signup({navigation}: any) {
         textColor="black"
         mode="outlined"
         loading={loading}
-        onPress={() => console.log('Pressed')}>
+        onPress={signUpWithEmail}>
         Register
       </Button>
       <View style={{alignItems: 'center'}}>
