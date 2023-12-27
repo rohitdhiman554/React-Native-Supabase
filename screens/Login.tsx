@@ -1,12 +1,40 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import React, {useState} from 'react';
 import {Button, TextInput} from 'react-native-paper';
 import {TouchableOpacity} from 'react-native';
+import {supabase} from '../lib/supabase';
 
 const Login = ({navigation}: any) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+
+  async function signInWithEmail() {
+    setLoading(true);
+
+    const {data: userExists, error: userExistsError} = await supabase
+      .from('auth')
+      .select('email')
+      .eq('email', email)
+      .single();
+
+    if (userExistsError || !userExists) {
+      Alert.alert('Error', 'User does not exist');
+      setLoading(false);
+      return;
+    }
+
+    const {error} = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+      setLoading(false);
+      return;
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -35,7 +63,7 @@ const Login = ({navigation}: any) => {
         textColor="black"
         mode="outlined"
         loading={loading}
-        onPress={() => console.log('Pressed')}>
+        onPress={signInWithEmail}>
         Login
       </Button>
 

@@ -12,6 +12,10 @@ function App(): React.JSX.Element {
   const AppStack = createNativeStackNavigator();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const onLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   useEffect(() => {
     const checkSession = async () => {
       const {data, error} = await supabase.auth.getSession();
@@ -36,7 +40,9 @@ function App(): React.JSX.Element {
         </AuthStack.Navigator>
       ) : (
         <AppStack.Navigator initialRouteName="Dashboard">
-          <AppStack.Screen name="Dashboard" component={Dashboard} />
+          <AppStack.Screen name="Dashboard">
+            {props => <Dashboard {...props} onLogout={onLogout} />}
+          </AppStack.Screen>
         </AppStack.Navigator>
       )}
     </NavigationContainer>

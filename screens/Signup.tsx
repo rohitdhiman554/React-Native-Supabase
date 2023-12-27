@@ -43,7 +43,7 @@ export default function Signup({navigation}: any) {
 
     const hashedPassword = await hashPassword(password);
 
-    const {data, error: dbError} = await supabase.from('auth').insert({
+    const {error: dbError} = await supabase.from('auth').insert({
       fullName: name,
       email: email,
       password: hashedPassword,
