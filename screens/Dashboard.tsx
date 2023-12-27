@@ -3,7 +3,7 @@ import React from 'react';
 import {Button} from 'react-native-paper';
 import {supabase} from '../lib/supabase';
 
-export default function Dashboard({onLogout}: any) {
+export default function Dashboard({setIsLoggedIn}: any) {
   async function handleLogout() {
     const {error} = await supabase.auth.signOut();
 
@@ -11,7 +11,7 @@ export default function Dashboard({onLogout}: any) {
       Alert.alert(error.message);
       return;
     }
-    onLogout();
+    setIsLoggedIn(false);
   }
   return (
     <View>

@@ -12,10 +12,6 @@ function App(): React.JSX.Element {
   const AppStack = createNativeStackNavigator();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const onLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   useEffect(() => {
     const checkSession = async () => {
       const {data, error} = await supabase.auth.getSession();
@@ -35,13 +31,17 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       {!isLoggedIn ? (
         <AuthStack.Navigator initialRouteName="Sign up">
-          <AuthStack.Screen name="Sign up" component={Signup} />
-          <AuthStack.Screen name="Login" component={Login} />
+          <AuthStack.Screen name="Sign up">
+            {props => <Signup {...props} setIsLoggedIn={setIsLoggedIn} />}
+          </AuthStack.Screen>
+          <AuthStack.Screen name="Login">
+            {props => <Login {...props} setIsLoggedIn={setIsLoggedIn} />}
+          </AuthStack.Screen>
         </AuthStack.Navigator>
       ) : (
         <AppStack.Navigator initialRouteName="Dashboard">
           <AppStack.Screen name="Dashboard">
-            {props => <Dashboard {...props} onLogout={onLogout} />}
+            {props => <Dashboard {...props} setIsLoggedIn={setIsLoggedIn} />}
           </AppStack.Screen>
         </AppStack.Navigator>
       )}

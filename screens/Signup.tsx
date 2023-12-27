@@ -4,7 +4,7 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {supabase} from '../lib/supabase';
 import {TextInput, Button} from 'react-native-paper';
 
-export default function Signup({navigation}: any) {
+export default function Signup({navigation, setIsLoggedIn}: any) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -57,7 +57,7 @@ export default function Signup({navigation}: any) {
     }
 
     setLoading(false);
-    navigation.navigate('Dashboard');
+    setIsLoggedIn(true);
   }
 
   return (
