@@ -43,7 +43,6 @@ export default function Signup({navigation}: any) {
 
     const hashedPassword = await hashPassword(password);
 
-    console.log('Hash', hashPassword);
     const {data, error: dbError} = await supabase.from('auth').insert({
       fullName: name,
       email: email,
@@ -58,6 +57,7 @@ export default function Signup({navigation}: any) {
     }
 
     setLoading(false);
+    navigation.navigate('Dashboard');
   }
 
   return (
