@@ -3,11 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Dashboard from '../screens/Dashboard';
 
-interface AppNavigationProps {
-  setIsLoggedIn: (e: boolean) => void;
-}
-
-const AppNavigation = ({setIsLoggedIn}: AppNavigationProps) => {
+const AppNavigation = ({setIsLoggedIn}: any) => {
   const AppStack = createNativeStackNavigator();
 
   return (
