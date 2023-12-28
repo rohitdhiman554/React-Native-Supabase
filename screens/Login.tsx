@@ -32,6 +32,8 @@ const Login = ({navigation, setIsLoggedIn}: any) => {
 
     if (error) {
       Alert.alert(error.message);
+      setLoading(false);
+
       return;
     }
     setIsLoggedIn(true);
