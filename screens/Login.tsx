@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, Alert} from 'react-native';
 import React, {useState} from 'react';
 import {Button, TextInput} from 'react-native-paper';
 import {TouchableOpacity} from 'react-native';
+
 import {supabase} from '../lib/supabase';
 
 const Login = ({navigation, setIsLoggedIn}: any) => {
@@ -31,10 +32,10 @@ const Login = ({navigation, setIsLoggedIn}: any) => {
 
     if (error) {
       Alert.alert(error.message);
-      setLoading(false);
       return;
     }
     setIsLoggedIn(true);
+    setLoading(false);
   }
 
   return (
@@ -74,7 +75,7 @@ const Login = ({navigation, setIsLoggedIn}: any) => {
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <Text> Doesn't have an account? </Text>
+          <Text style={{color: 'black'}}> Doesn't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Sign up')}>
             <Text style={{color: 'blue'}}> Sign up</Text>
           </TouchableOpacity>

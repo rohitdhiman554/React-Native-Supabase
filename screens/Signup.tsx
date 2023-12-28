@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import bcrypt from 'react-native-bcrypt';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {supabase} from '../lib/supabase';
 import {TextInput, Button} from 'react-native-paper';
+
+import {supabase} from '../lib/supabase';
 
 export default function Signup({navigation, setIsLoggedIn}: any) {
   const [email, setEmail] = useState('');
@@ -29,7 +30,6 @@ export default function Signup({navigation, setIsLoggedIn}: any) {
   async function signUpWithEmail() {
     setLoading(true);
 
-    // Sign up with Supabase Auth
     const {error} = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -54,10 +54,10 @@ export default function Signup({navigation, setIsLoggedIn}: any) {
       Alert.alert('Error', dbError.message);
     } else {
       console.log('User details inserted successfully');
+      setIsLoggedIn(true);
     }
 
     setLoading(false);
-    setIsLoggedIn(true);
   }
 
   return (
@@ -104,7 +104,7 @@ export default function Signup({navigation, setIsLoggedIn}: any) {
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <Text> Already have an account? </Text>
+          <Text style={{color: 'black'}}> Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={{color: 'blue'}}> Login</Text>
           </TouchableOpacity>
