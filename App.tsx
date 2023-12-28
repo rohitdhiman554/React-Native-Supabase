@@ -15,11 +15,14 @@ function App(): React.JSX.Element {
   useEffect(() => {
     const checkSession = async () => {
       const {data, error} = await supabase.auth.getSession();
+      console.log('data', data);
       if (error) {
+        // Handle the error
         console.error('Error fetching session:', error);
         return;
       }
       setIsLoggedIn(true);
+      // Additional logic if needed
     };
 
     checkSession();
