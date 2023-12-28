@@ -19,11 +19,12 @@ function App(): React.JSX.Element {
         console.error('Error fetching session:', error);
         return;
       }
-      setIsLoggedIn(true);
+      data.session ? setIsLoggedIn(true) : setIsLoggedIn(false);
     };
 
     checkSession();
   }, []);
+
   return (
     <NavigationContainer>
       {!isLoggedIn ? (
