@@ -29,6 +29,7 @@ export default function Signup({navigation, setIsLoggedIn}: any) {
   async function signUpWithEmail() {
     setLoading(true);
 
+    // Sign up with Supabase Auth
     const {error} = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -103,7 +104,7 @@ export default function Signup({navigation, setIsLoggedIn}: any) {
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <Text style={{color: 'black'}}> Already have an account? </Text>
+          <Text> Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={{color: 'blue'}}> Login</Text>
           </TouchableOpacity>

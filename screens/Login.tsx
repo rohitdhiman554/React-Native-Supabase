@@ -74,7 +74,7 @@ const Login = ({navigation, setIsLoggedIn}: any) => {
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <Text style={{color: 'black'}}> Doesn't have an account? </Text>
+          <Text> Doesn't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Sign up')}>
             <Text style={{color: 'blue'}}> Sign up</Text>
           </TouchableOpacity>
