@@ -3,7 +3,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Dashboard from '../screens/Dashboard';
 
-const AuthNavigation = ({setIsLoggedIn}: any) => {
+interface AuthNavigationProps {
+  setIsLoggedIn: (e: boolean) => void;
+}
+
+const AuthNavigation = ({setIsLoggedIn}: AuthNavigationProps) => {
   const AuthStack = createNativeStackNavigator();
   return (
     <AuthStack.Navigator initialRouteName="Dashboard">
