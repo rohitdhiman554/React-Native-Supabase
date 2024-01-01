@@ -18,7 +18,7 @@ function App() {
     const checkSession = async () => {
       const {data, error} = await supabase.auth.getSession();
       if (error) {
-        console.error('Error fetching session:', error);
+        console.error('Error fetching session ', error);
         return;
       }
       data.session
