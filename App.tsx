@@ -8,10 +8,10 @@ import Dashboard from './screens/Dashboard';
 import {supabase} from './lib/supabase';
 import useStore from './store';
 
-function App() {
-  const AuthStack = createNativeStackNavigator();
-  const AppStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
+const AppStack = createNativeStackNavigator();
 
+function App() {
   const isLoggedIn = useStore(state => state.isLoggedIn);
 
   useEffect(() => {

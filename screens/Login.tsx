@@ -13,7 +13,6 @@ const Login = ({navigation}: any) => {
 
   async function signInWithEmail() {
     setLoading(true);
-
     const {data: userExists, error: userExistsError} = await supabase
       .from('auth')
       .select('email')
