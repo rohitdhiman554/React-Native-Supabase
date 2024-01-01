@@ -4,8 +4,9 @@ import {Button, TextInput} from 'react-native-paper';
 import {TouchableOpacity} from 'react-native';
 
 import {supabase} from '../lib/supabase';
+import useStore from '../store';
 
-const Login = ({navigation, setIsLoggedIn}: any) => {
+const Login = ({navigation}: any) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ const Login = ({navigation, setIsLoggedIn}: any) => {
 
       return;
     }
-    setIsLoggedIn(true);
+    useStore.getState().setIsloggedIn(true);
     setLoading(false);
   }
 

@@ -1,13 +1,11 @@
 import {View, Text, Alert} from 'react-native';
 import React from 'react';
 import {Button} from 'react-native-paper';
+
 import {supabase} from '../lib/supabase';
+import useStore from '../store';
 
-interface DashboardProps {
-  setIsLoggedIn: (e: boolean) => void;
-}
-
-export default function Dashboard({setIsLoggedIn}: DashboardProps) {
+export default function Dashboard() {
   async function handleLogout() {
     const {error} = await supabase.auth.signOut();
 
@@ -15,7 +13,7 @@ export default function Dashboard({setIsLoggedIn}: DashboardProps) {
       Alert.alert(error.message);
       return;
     }
-    setIsLoggedIn(false);
+    useStore.getState().setIsloggedIn(false);
   }
   return (
     <View>

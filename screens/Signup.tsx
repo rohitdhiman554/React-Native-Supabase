@@ -4,8 +4,9 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 
 import {supabase} from '../lib/supabase';
+import useStore from '../store';
 
-export default function Signup({navigation, setIsLoggedIn}: any) {
+export default function Signup({navigation}: any) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -54,7 +55,7 @@ export default function Signup({navigation, setIsLoggedIn}: any) {
       Alert.alert('Error', dbError.message);
     } else {
       console.log('User details inserted successfully');
-      setIsLoggedIn(true);
+      useStore.getState().setIsloggedIn(true);
     }
 
     setLoading(false);

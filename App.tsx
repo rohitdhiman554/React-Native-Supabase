@@ -6,11 +6,13 @@ import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Dashboard from './screens/Dashboard';
 import {supabase} from './lib/supabase';
+import useStore from './store';
 
-function App(): React.JSX.Element {
+function App() {
   const AuthStack = createNativeStackNavigator();
   const AppStack = createNativeStackNavigator();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const isLoggedIn = useStore(state => state.isLoggedIn);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -19,7 +21,9 @@ function App(): React.JSX.Element {
         console.error('Error fetching session:', error);
         return;
       }
-      data.session ? setIsLoggedIn(true) : setIsLoggedIn(false);
+      data.session
+        ? useStore.getState().setIsloggedIn(true)
+        : useStore.getState().setIsloggedIn(false);
     };
 
     checkSession();
@@ -29,18 +33,12 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       {!isLoggedIn ? (
         <AuthStack.Navigator initialRouteName="Sign up">
-          <AuthStack.Screen name="Sign up">
-            {props => <Signup {...props} setIsLoggedIn={setIsLoggedIn} />}
-          </AuthStack.Screen>
-          <AuthStack.Screen name="Login">
-            {props => <Login {...props} setIsLoggedIn={setIsLoggedIn} />}
-          </AuthStack.Screen>
+          <AuthStack.Screen name="Sign up" component={Signup} />
+          <AuthStack.Screen name="Login" component={Login} />
         </AuthStack.Navigator>
       ) : (
         <AppStack.Navigator initialRouteName="Dashboard">
-          <AppStack.Screen name="Dashboard">
-            {props => <Dashboard {...props} setIsLoggedIn={setIsLoggedIn} />}
-          </AppStack.Screen>
+          <AppStack.Screen name="Dashboard" component={Dashboard} />
         </AppStack.Navigator>
       )}
     </NavigationContainer>
