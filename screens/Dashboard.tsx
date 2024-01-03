@@ -15,9 +15,10 @@ export default function Dashboard() {
     }
     useStore.getState().setIsloggedIn(false);
   }
+
   return (
     <View>
-      <Text>Dashboard</Text>
+      <Text>Dashboard Menu</Text>
       <Button onPress={handleLogout}>Log out</Button>
     </View>
   );
