@@ -5,7 +5,7 @@ interface StoreStateTypes {
 }
 
 interface StoreTypes extends StoreStateTypes {
-  setIsloggedIn: (isOpen: boolean) => void;
+  setIsLoggedIn: (isOpen: boolean) => void;
 }
 
 const getInitialState: () => StoreStateTypes = () => {
@@ -17,7 +17,7 @@ const getInitialState: () => StoreStateTypes = () => {
 const useStore = create<StoreTypes>(set => ({
   ...getInitialState(),
 
-  setIsloggedIn(isOpen) {
+  setIsLoggedIn(isOpen) {
     set(() => ({isLoggedIn: isOpen}));
   },
 }));
