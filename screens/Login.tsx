@@ -36,7 +36,7 @@ const Login = ({navigation}: any) => {
 
       return;
     }
-    useStore.getState().setIsloggedIn(true);
+    useStore.getState().setIsLoggedIn(true);
     setLoading(false);
   }
 

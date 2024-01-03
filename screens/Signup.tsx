@@ -55,7 +55,7 @@ export default function Signup({navigation}: any) {
       Alert.alert('Error', dbError.message);
     } else {
       console.log('User details inserted successfully');
-      useStore.getState().setIsloggedIn(true);
+      useStore.getState().setIsLoggedIn(true);
     }
 
     setLoading(false);

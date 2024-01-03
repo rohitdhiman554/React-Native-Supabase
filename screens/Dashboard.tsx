@@ -13,7 +13,7 @@ export default function Dashboard() {
       Alert.alert(error.message);
       return;
     }
-    useStore.getState().setIsloggedIn(false);
+    useStore.getState().setIsLoggedIn(false);
   }
   return (
     <View>

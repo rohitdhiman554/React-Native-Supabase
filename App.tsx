@@ -22,8 +22,8 @@ function App() {
         return;
       }
       data.session
-        ? useStore.getState().setIsloggedIn(true)
-        : useStore.getState().setIsloggedIn(false);
+        ? useStore.getState().setIsLoggedIn(true)
+        : useStore.getState().setIsLoggedIn(false);
     };
 
     checkSession();
